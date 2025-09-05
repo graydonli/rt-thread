@@ -1,3 +1,5 @@
+Import('RTT_ROOT')
+Import('rtconfig')
 from building import *
 import os
 
@@ -59,9 +61,6 @@ else:
                         LINKFLAGS=LINKFLAGS, LOCAL_CFLAGS=LOCAL_CFLAGS,
                         CPPDEFINES=['__RTTHREAD__'], LOCAL_CPPDEFINES=['__RT_KERNEL_SOURCE__'])
 
-list = os.listdir(cwd)
-for item in list:
-    if os.path.isfile(os.path.join(cwd, item, 'SConscript')):
-        group = group + SConscript(os.path.join(item, 'SConscript'))
+group = group + SConscript(os.path.join('klibc', 'SConscript'))
 
 Return('group')
